@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(218, 218, 218);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 1px;
+            width: 150px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        button,
+        select {
+            width: calc(100% - 160px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .select-box {
+            display: inline-block;
+            width: calc(100% - 160px);
+            padding: 1px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login Form</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact:</label>
+                <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Birth Date:</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+            </div>
+            <div class="form-group">
+                <label for="profession" class="profession">Profession:</label>
+                <div class="select-box">
+                    <select id="profession" name="profession">
+                        <option value="housekeeping">House keeping</option>
+                        <option value="bartender">Bar tender</option>
+                        <option value="cleaningstaff">Cleaning Staff</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="language" class="language">Language:</label>
+                <div class="select-box">
+                    <select id="language" name="language">
+                        <option value="english">English</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="thailand">Thai Land</option>
+                        <option value="srilanka">Sri Lanka</option>
+                        <option value="russian">Russian</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Collect form data
+            var formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                profession: document.getElementById('profession').value,
+                language: document.getElementById('language').value,
+                contact: document.getElementById('contact').value,
+                birthdate: document.getElementById('birthdate').value
+            };
+
+            // Redirect based on profession
+            switch (formData.profession) {
+                case 'housekeeping':
+                    window.open('index1.html?' + serialize(formData), '_blank');
+                    break;
+                case 'bartender':
+                    window.open('index2.html?' + serialize(formData), '_blank');
+                    break;
+                case 'cleaningstaff':
+                    window.open('index3.html?' + serialize(formData), '_blank');
+                    break;
+                default:
+                    alert('Please select a valid profession.');
+                    break;
+            }
+        });
+
+        // Function to serialize object to query parameters
+        function serialize(obj) {
+            var str = [];
+            for (var key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]));
+                }
+            }
+            return str.join("&");
+        }
+    </script>
+</body>
+</html>
